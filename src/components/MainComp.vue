@@ -1,10 +1,22 @@
 <template>
-    <div id="container" v-if="albumsArr.length > 9">
-        <TrackComp
-        v-for="(element, index) in albumsArr"
-        :key="index"
-        :album="element"
-        />
+    <div>
+        <div>
+            <select v-model="genreFilter">
+                <option value="" >All</option>
+                <option value="rock">Rock</option>
+                <option value="pop">Pop</option>
+                <option value="jazz">Jazz</option>
+                <option value="metal">Metal</option>
+            </select>
+        </div>
+        <div id="container" v-if="albumsArr.length > 9">
+            <TrackComp
+            v-show="element.genre.toLowerCase().includes(genreFilter.toLowerCase())"
+            v-for="(element, index) in albumsArr"
+            :key="index"
+            :album="element"
+            />
+        </div>
     </div>
 
 </template>
@@ -20,7 +32,8 @@
         },
         data(){
             return{
-                albumsArr: []
+                albumsArr: [],
+                genreFilter: ""
             }
         },
         mounted(){
