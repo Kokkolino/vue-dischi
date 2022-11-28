@@ -8,10 +8,11 @@
                 <option value="jazz">Jazz</option>
                 <option value="metal">Metal</option>
             </select>
+            <input type="text" placeholder="cerca artista" v-model="authorFilter">
         </div>
         <div id="container" v-if="albumsArr.length > 9">
             <TrackComp
-            v-show="element.genre.toLowerCase().includes(genreFilter.toLowerCase())"
+            v-show="element.genre.toLowerCase().includes(genreFilter.toLowerCase()) && element.author.toLowerCase().includes(authorFilter.toLowerCase())"
             v-for="(element, index) in albumsArr"
             :key="index"
             :album="element"
@@ -33,7 +34,8 @@
         data(){
             return{
                 albumsArr: [],
-                genreFilter: ""
+                genreFilter: "",
+                authorFilter: "",
             }
         },
         mounted(){
@@ -61,6 +63,10 @@
         justify-content: space-evenly;
         align-content: center;
         flex-wrap: wrap;
+    }
+
+    select{
+        margin: 10px 20px;
     }
 
 </style>
